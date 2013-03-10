@@ -1,0 +1,8 @@
+class Event < ActiveRecord::Base
+  attr_accessible :description, :link, :name, :user_id
+
+  belongs_to :user
+
+  validates :user, presence: true
+  validates :link, presence: true, format: /^http:\/\/.+$/
+end
