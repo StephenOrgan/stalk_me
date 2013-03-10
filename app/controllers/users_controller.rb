@@ -8,5 +8,8 @@ class UsersController < ApplicationController
   @user = User.new(params[:user])
   end
 
+  def index
+  @users = User.all
+  end
    
 end
