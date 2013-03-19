@@ -8,7 +8,7 @@ class Devise::OmniauthCallbacksController < ApplicationController
 		name = auth['info']['name']
 
 		user = User.where(uid: uid, provider: provider, name: name).first_or_create do |u|
-			u.email = '#{uid}@twitter.com'
+			u.email = "#{uid}@twitter.com"
 		end
 
 		sign_in_and_redirect user
