@@ -13,6 +13,16 @@ class Devise::OmniauthCallbacksController < ApplicationController
 			u.email = "#{uid}@twitter.com"
 		end
 
+		@friends = Twitter.friend_ids(user.name).collection
+
+  	@friends.each do |fid| 
+     	if User.where(uid: fid).exists?
+      	Follow.create(user_id: user.id, follower_id: User.where(uid: fid).first.id)
+     	end
+    end
+
+
+
 		sign_in_and_redirect user
 	end
 end
