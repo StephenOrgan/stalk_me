@@ -14,7 +14,7 @@
   <tr>
     <td><%= event.description %></td>
     <td><%= event.user.name %></td>
-    <td><%= event.user.handle %></td>
+    <td>@<%= event.user.handle %></td>
     <td><%= time_ago_in_words(event.created_at) %> </td>
     <td><%= link_to 'Show', event %></td>
     <td><%= link_to 'Edit', edit_event_path(event) %></td>
