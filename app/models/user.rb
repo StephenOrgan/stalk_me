@@ -25,5 +25,4 @@ class User < ActiveRecord::Base
     uid.blank?
   end
 
-  end
 end
