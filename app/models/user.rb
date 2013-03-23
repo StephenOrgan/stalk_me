@@ -24,4 +24,6 @@ class User < ActiveRecord::Base
   def password_required?
     uid.blank?
   end
+
+  end
 end
