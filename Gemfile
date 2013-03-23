@@ -9,6 +9,8 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 
 gem 'pry-rails'
+
+gem 'twitter'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
