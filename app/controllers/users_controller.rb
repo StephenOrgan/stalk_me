@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   @Friends = Twitter.friend_ids(@User.name).collection
 
   @Friends.each do |fid| 
-      User.where(uid: fid).exists?
+     if User.where(uid: fid).exists?
       Follow.create(user_id: @User.id, follower_id: User.where(uid: fid).first.id)
+     end
     end
 
   end
