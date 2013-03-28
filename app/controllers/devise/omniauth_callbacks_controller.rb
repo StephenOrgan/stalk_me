@@ -7,6 +7,7 @@ class Devise::OmniauthCallbacksController < ApplicationController
 		provider = auth['provider']
 		name = auth['info']['name']
 		handle = auth['info']['nickname']
+		
 
 
 		user = User.where(uid: uid, provider: provider, name: name, handle: handle).first_or_create do |u|

@@ -12,10 +12,11 @@ class User < ActiveRecord::Base
          :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :handle
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :handle, :image
   # attr_accessible :title, :body
 
   has_many :events
+  has_attached_file :image, :styles => { :thumb => "100x100>"}
 
   def email_required?
     uid.blank?
