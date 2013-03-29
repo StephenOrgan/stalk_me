@@ -9,7 +9,7 @@
 
   <tr>
     <td><%= @event.description %></td>
-    <td><img src=  "<%= @event.link %>" ></td>
+    <td><img width="300" height="300" src=  "<%= @event.link %>" ></td>
     <td><b>Created:</b> <%= time_ago_in_words(@event.created_at) %> ago </td>
   	<td><b>Updated:</b> <%= time_ago_in_words(@event.updated_at) %> ago </td>
     <td><%= link_to 'Show', @event %></td>

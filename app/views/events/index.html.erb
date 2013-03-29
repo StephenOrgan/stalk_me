@@ -4,14 +4,14 @@
 
 <% @events.each do |event| %>
 
-  <div>
-    <div><%= image_tag event.user.image.url(:thumb) %><%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %><div>
-    	<div><img src=  "<%= event.link %>" ></div>
+  <ul>
+    <div><%= image_tag event.user.image.url(:thumb) %><%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %></div>
+    	<div><img width="300" height="300" src=  "<%= event.link %>" ></div>
       <div><%= link_to 'Edit', edit_event_path(event) %></div>
       <div><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <div><%= time_ago_in_words(event.created_at) %> </div>
 
-  </div>
+  </ul>
 <% end %>
 </table>
 
