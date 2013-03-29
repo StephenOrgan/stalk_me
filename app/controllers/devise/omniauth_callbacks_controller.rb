@@ -16,7 +16,7 @@ class Devise::OmniauthCallbacksController < ApplicationController
 
 	  	@friends.each do |fid| 
 	     	if User.where(uid: fid.to_s).exists?
-	      	Follow.create(user_id: user.id, follower_id: User.where(uid: fid).first.id)
+	      	Follow.create(user_id: user.id.to_s, follower_id: User.where(uid: fid).first.id.to_s)
 	     	end
 	    end
 
