@@ -3,12 +3,10 @@ class Devise::OmniauthCallbacksController < ApplicationController
 
 	def twitter
 		auth = env['omniauth.auth']
-		uid = auth['uid']
+		uid = auth['uid'].to_s
 		provider = auth['provider']
 		name = auth['info']['name']
 		handle = auth['info']['nickname']
-		
-
 
 		user = User.where(uid: uid, provider: provider, name: name, handle: handle).first_or_create do |u|
 			u.email = "#{uid}@twitter.com"
@@ -16,14 +14,15 @@ class Devise::OmniauthCallbacksController < ApplicationController
 
 		@friends = Twitter.friend_ids(user.name).collection
 
-  	@friends.each do |fid| 
-     	if User.where(uid: fid).exists?
-      	Follow.create(user_id: user.id, follower_id: User.where(uid: fid).first.id)
-     	end
-    end
+	  	@friends.each do |fid| 
+	     	if User.where(uid: fid).exists?
+	      	Follow.create(user_id: user.id, follower_id: User.where(uid: fid).first.id)
+	     	end
+	    end
 
 
 
 		sign_in_and_redirect user
 	end
+
 end

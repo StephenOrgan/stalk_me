@@ -6,13 +6,13 @@
 
 <% @events.each do |event| %>
 
-  <li>
+  <div>
     <div><%= image_tag event.user.image.url(:thumb) %><%= event.user.name %> posted: <%= link_to event.description, event %><div>
       <div><%= link_to 'Edit', edit_event_path(event) %></div>
       <div><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></div>
       <div><%= time_ago_in_words(event.created_at) %> </div>
 
-  </li>
+  </div>
 <% end %>
 </table>
 
