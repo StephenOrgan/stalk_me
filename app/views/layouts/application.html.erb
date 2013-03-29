@@ -12,20 +12,26 @@
 </head>
 <body>
 
-<div class="navbar">
-  <div class="navbar-inner">
-    <a class="brand" href="#">Stalker</a>
-    <ul class="nav">
-      <li class="active">
-        <%= link_to "Events", events_path %> 
-
-      </li>
-      <% if user_signed_in? %>
-        <li class="pull-right" style='float: right;'><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "Sign In", new_user_session_path %></li>
-      <% end %>
-    </ul>
+<div class="container span12">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">Stalker</a>
+          <ul class="nav">
+            <% if user_signed_in? %>
+            <li class="active"><%= link_to "Events", events_path %> </li>
+          </ul>
+            <ul class="nav pull-right">  
+            <li>Hello, <%= current_user.name %>!</li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+            <% else %>
+            <ul class="nav">
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+            </ul>
+          <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
