@@ -9,7 +9,7 @@
 
   <% @users.each do |user| %>
   <tr>
-    <td><%= image_tag user.image.url(:thumb) %>
+    <td><%= image_tag user.image.url(:thumb) %></td>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= link_to 'Show', user %></td>

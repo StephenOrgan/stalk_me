@@ -12,28 +12,30 @@
 </head>
 <body>
 
-<div class="container span12">
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="#">Stalker</a>
-          <ul class="nav">
-            <% if user_signed_in? %>
-            <li class="active"><%= link_to "Events", events_path %> </li>
-          </ul>
-            <ul class="nav pull-right">  
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">Stalker</a>
+        <ul class="nav">
+          <% if user_signed_in? %>
+          <li class="<%= 'active' if params[:controller] == 'events' %>"><%= link_to "Events", events_path %> </li>
+            <% if current_user %>
+              <li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to "Profile", user_path(current_user) %></li>
+            <% end %>
+        </ul>
+          <ul class="nav pull-right">  
             <li>Hello, <%= current_user.name %>!</li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-            </ul>
-            <% else %>
-            <ul class="nav">
-            <li><%= link_to "Sign In", new_user_session_path %></li>
-            </ul>
-          <% end %>
-      </div>
+          </ul>
+          <% else %>
+          <ul class="nav">
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+          </ul>
+        <% end %>
     </div>
   </div>
 </div>
+
 
 <div class="container">
    <%= yield %>

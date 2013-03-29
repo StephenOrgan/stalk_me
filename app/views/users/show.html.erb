@@ -1,0 +1,25 @@
+<h1><%= image_tag @user.image.url(:thumb) %> <%= @user.name %></h1>
+<%= link_to 'Edit Profile', edit_user_path(@user) %>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+
+<div><strong>What <%= @user.name %> have been saying:</strong></div>
+<table>
+
+<% @user.events.each do |event| %>
+
+  <div>
+    <div><%= link_to event.description, event %><div>
+    <div><img src=  "<%= event.link %>" ></div>
+      <div><%= link_to 'Edit', edit_event_path(event) %></div>
+      <div><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <div><%= time_ago_in_words(event.created_at) %> ago </div>
+
+  </div>
+<% end %>
+</table>
+
