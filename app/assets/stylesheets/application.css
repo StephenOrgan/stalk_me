@@ -12,12 +12,6 @@
  *= require_tree .
  */
 
-<style type="text/css">
-.login {
-	display: block;
-	float: right;
-	padding: 10px 20px 10px;
-	margin-right: 20px;
-	color: white;
+.notices p {
+	line-height:20px !important;
 }
-</style>
