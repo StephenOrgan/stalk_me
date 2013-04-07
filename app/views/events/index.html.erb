@@ -1,17 +1,17 @@
-<h1>Here's what been happening </h1>
-
 <table>
+<h1>Here's what been happening</h1>
 
 <% @events.each do |event| %>
 
   <ul>
-    <div><%= image_tag event.user.image.url(:thumb) %><%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %></div>
-    	<div><img width="300" height="300" src=  "<%= event.link %>" ></div>
-      <div><%= link_to 'Edit', edit_event_path(event) %></div>
-      <div><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></div>
-      <div><%= time_ago_in_words(event.created_at) %> </div>
-
+    <div><%= image_tag event.user.image.url(:thumb) %><%= time_ago_in_words(event.created_at) %> ago, <%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %> </div>
+    
+    <div><img width="300" height="300" src=  "<%= event.link %>" ></div>
   </ul>
+ 
+  <ul><%= render event.comments %></ul>
+  <ul><%= render 'comments/form', comment: event.comments.build, event: event %></ul>
+
 <% end %>
 </table>
 

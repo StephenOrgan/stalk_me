@@ -1,5 +1,28 @@
 <h1>Create a new post!</h1>
 
-<%= render 'form' %>
+<% if @event.errors.any? %>
+  <div class='alert alert-error'>
+    <strong>Something went error! </strong>
 
-<%= link_to 'back', events_path %>
+    <ul>
+    	<% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    	<% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @event do |f| %>
+	
+	<div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :link %>
+    <%= f.text_field :link %>
+  </div>
+
+	<%= f.submit "Post", class: 'btn btn-primary' %>
+<% end %>

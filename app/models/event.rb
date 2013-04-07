@@ -5,4 +5,6 @@ class Event < ActiveRecord::Base
 
   validates :user, presence: true
   validates :link, presence: true, format: /^http:\/\/.+$/
+
+  has_many :comments
 end

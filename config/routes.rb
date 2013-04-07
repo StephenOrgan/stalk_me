@@ -1,5 +1,5 @@
 StalkMe::Application.routes.draw do
-  
+
 root to: 'events#index'
 
 devise_for :users
@@ -8,7 +8,9 @@ resources :users do
   resources :events
 end
 
-resources :events 
+resources :events do
+  resources :comments
+end
 
 
   # The priority is based upon order of creation:

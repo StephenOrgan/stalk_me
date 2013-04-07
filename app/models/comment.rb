@@ -1,6 +1,9 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :event_id
+  attr_accessible :body
 
-  belongs_to :users
-  belongs_to :events
+  validates :event, presence: true
+  validates :user, presence: true
+
+  belongs_to :user
+  belongs_to :event
 end
