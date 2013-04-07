@@ -4,9 +4,11 @@ class EventsController < ApplicationController
   		@event = Event.new
 	end
 
+	# POST /events
 	def create
 		@event = current_user.events.build(params[:event])
-
+		@event.user_id = current_user.id
+		@event.likes = 0
 		if @event.save
 			redirect_to events_path created: true
 		else
@@ -14,18 +16,31 @@ class EventsController < ApplicationController
 		end
 	end
 
+	# GET /events
 	def index
 		if params[:user_id]
 			@events = User.find(params[:user_id]).events
 		else
-			@events = Event.all
+			@events = Event.order('created_at DESC').all
+		end
+
+		respond_to do |format|
+			format.html 
+			format.json { render :json => @events }
 		end
 	end
 
+	# GET /events/1
 	def show
 		@event = Event.find(params[:id])
+
+		respond_to do |format|
+			format.html
+			format.jason { render :json => @event }
+		end
 	end
 
+	# GET /events/1/edit
 	def edit
 		@event = Event.find(params[:id])
 	end
