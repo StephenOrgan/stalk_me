@@ -1,10 +1,14 @@
-<h1><%= image_tag @user.image.url(:thumb) %> <%= @user.name %></h1>
+<h1>
+	<% if @user.uid.present? %>
+  	<%= image_tag Twitter.user(@user.uid.to_i).profile_image_url %>
+  <% elsif @user.image.present? %>
+    <%= image_tag @user.image.url(:thumb) %>
+  <% else %>
+  	No image yet
+  <% end %>
+	<%= @user.name %>
+</h1>
 <%= link_to 'Edit Profile', edit_user_path(@user) %>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
 
 
 <div><strong>What <%= @user.name %> have been saying:</strong></div>

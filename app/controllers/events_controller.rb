@@ -18,11 +18,22 @@ class EventsController < ApplicationController
 
 	# GET /events
 	def index
-		if params[:user_id]
-			@events = User.find(params[:user_id]).events
-		else
-			@events = Event.order('created_at DESC').all
-		end
+		@event = Event.new
+
+		##if params[:user_id]
+			##@events = User.find(params[:user_id]).events
+			##@events = current_user.events.order('created_at DESC')
+
+			followers = current_user.followers.collect do |follower|
+										follower.id
+									end
+			followers << current_user.id 
+			
+			@events = Event.where("user_id IN (?)", followers).order('created_at DESC')
+			##@events = User.where(:id => current_user.user_id).order().having().group()
+		##else
+			##@events = Event.order('created_at DESC').all
+		##end
 
 		respond_to do |format|
 			format.html 

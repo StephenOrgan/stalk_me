@@ -9,7 +9,13 @@
 
   <% @users.each do |user| %>
   <tr>
-    <td><%= image_tag user.image.url(:thumb) %></td>
+    <% if user.uid.present? %>
+    <td><%= image_tag Twitter.user(user.uid.to_i).profile_image_url %></td>
+    <% elsif user.image.present? %>
+      <td><%= image_tag user.image.url(:thumb) %></td>
+    <% else %>
+      <td>No image yet</td>
+    <% end %>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= link_to 'Show', user %></td>

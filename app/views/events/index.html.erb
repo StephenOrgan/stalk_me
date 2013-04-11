@@ -1,10 +1,19 @@
 <table>
 <h1>Here's what been happening</h1>
 
+<%= render 'events/form' %>
+
 <% @events.each do |event| %>
 
   <ul>
-    <div><%= image_tag event.user.image.url(:thumb) %><%= time_ago_in_words(event.created_at) %> ago, <%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %> </div>
+    <div><% if event.user.uid.present? %>
+  			<%= image_tag Twitter.user(event.user.uid.to_i).profile_image_url %>
+  			<% elsif event.user.image.present? %>
+    		<%= image_tag event.user.image.url(:thumb) %>
+  			<% else %>
+  			No image yet
+  			<% end %>
+    		<%= time_ago_in_words(event.created_at) %> ago, <%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %> </div>
     
     <div><img width="300" height="300" src=  "<%= event.link %>" ></div>
   </ul>
