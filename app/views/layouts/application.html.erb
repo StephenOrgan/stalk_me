@@ -10,7 +10,8 @@
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script> 
   
 </head>
-<body>
+
+<body <%= (params[:controller] == 'devise/sessions' && params[:action] == 'new') ? 'id=background' : '' %>>
 
 <div class="navbar navbar-static-top">
   <div class="navbar-inner">
@@ -29,17 +30,21 @@
           </ul>
           <% else %>
           <ul class="nav">
-          <li><%= link_to "Sign In", new_user_session_path %></li>
+            <%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+              <li><%= link_to "Have an account? Sign in here!", omniauth_authorize_path(resource_name, provider) %></li>
+            <% end -%>
+          
           </ul>
         <% end %>
+          <% end %> 
     </div>
   </div>
 </div>
 
-
 <div class="container">
    <%= yield %>
  </div> 
-   
+ 
 </body>
 </html>

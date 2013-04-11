@@ -15,3 +15,7 @@
 .notices p {
 	line-height:20px !important;
 }
+
+#background {
+	background: url(/assets/dan3.jpg) left top no-repeat;
+}
