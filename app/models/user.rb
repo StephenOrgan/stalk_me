@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :likes
   has_many :events
-  has_attached_file :image, :styles => { :thumb => "100x100>"}
+  has_attached_file :image, :styles => { :thumb => "100x100>", :t1 => "50x50>"}
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,

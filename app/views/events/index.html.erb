@@ -1,28 +1,39 @@
-<table>
-<h1>Here's what been happening</h1>
+<body class="topbar-nav" <%= (params[:controller] == 'events' && params[:action] == 'index') ? 'id=background1' : '' %>>
+	<div class="container-fluid">
+		<div class="row-fluid">
+		<div class="well span8">
+			
+			<ul>
+  			<h2>Stay Updated</h2>
+				
+				<% @events.each do |event| %>	
+    			<div>
+    			<% if event.user.uid.present? %>
+					<%= image_tag Twitter.user(event.user.uid.to_i).profile_image_url %>
+	  			<% elsif event.user.image.present?%>
+	    		<%= image_tag event.user.image.url(:thumb)  %>
+	  			<% else %>
+	  			No image yet
+	  			<% end %>
 
-<%= render 'events/form' %>
+	    		<%= time_ago_in_words(event.created_at) %> ago, <%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %>
+	    
+	    		<img width="400" height="400" src=  "<%= event.link %>" >
 
-<% @events.each do |event| %>
+	  			<%= render event.comments %>
+	  			<%= render 'comments/form', comment: event.comments.build, event: event %>
+					<% end %>
+				</div>
+			</ul>
 
-  <ul>
-    <div><% if event.user.uid.present? %>
-  			<%= image_tag Twitter.user(event.user.uid.to_i).profile_image_url %>
-  			<% elsif event.user.image.present? %>
-    		<%= image_tag event.user.image.url(:thumb) %>
-  			<% else %>
-  			No image yet
-  			<% end %>
-    		<%= time_ago_in_words(event.created_at) %> ago, <%= link_to event.user.name, user_path(event.user) %> posted: <%= link_to event.description, event %> </div>
-    
-    <div><img width="300" height="300" src=  "<%= event.link %>" ></div>
-  </ul>
- 
-  <ul><%= render event.comments %></ul>
-  <ul><%= render 'comments/form', comment: event.comments.build, event: event %></ul>
-
-<% end %>
-</table>
-
+<div class="span4" style='height:100%'>
+	<div class="well sidebar-nav sidebar-nav-fixed" style="background-color:orange">
+	<h2>Hello, <%= current_user.name %>!</h2>
+	<div style= "margin-top:30px"><%= render 'events/form' %></div>
+</div>
+</div>
+	</div>
+</div>
+</body>
 
 <div><%= link_to 'New event', new_event_path %></div>

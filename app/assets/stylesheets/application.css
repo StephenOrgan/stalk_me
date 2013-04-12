@@ -11,6 +11,9 @@
  *= require_self
  *= require_tree .
  */
+.well [class^="span"] + [class^="span"]{
+	border-left: 1px solid #e3e3e3;
+}
 
 .notices p {
 	line-height:20px !important;
@@ -18,4 +21,28 @@
 
 #background {
 	background: url(/assets/dan3.jpg) left top no-repeat;
+}
+
+#background1 {
+	background: url(/assets/dan9.jpg) left top no-repeat fixed;
+
+}
+.sidebar-nav-fixed {
+	padding: 9px 0;
+	position:fixed;
+	right:80px;
+	top:60px;
+	width:400px;
+}
+
+.row-fluid > .span-fixed-sidebar {
+	margin-right: 290px;
+}
+
+body {
+	padding-top: 60px;
+}
+
+h2 {
+	font-family: Times;
 }

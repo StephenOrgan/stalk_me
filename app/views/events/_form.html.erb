@@ -1,14 +1,26 @@
 <%= form_for @event do |f| %>
 	
 	<div class="field">
-    <%= f.label :description %> <%= f.text_field :description %>
+    <%= f.text_field :description, placeholder: "How do you feel today?" %>
   </div>
 
   <div class="field">
-    <%= f.label :link %> <%= f.text_field :link %>
+    <%= f.text_field :link, placeholder: "Post A Picture" %>
   </div>
 
   <div class="actions">
 	 <%= f.submit "Post it!", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<% if @event.errors.any? %>
+  <div class='alert alert-error'>
+    <strong>Something went error! </strong>
+
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>

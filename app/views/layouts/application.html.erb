@@ -13,10 +13,10 @@
 
 <body <%= (params[:controller] == 'devise/sessions' && params[:action] == 'new') ? 'id=background' : '' %>>
 
-<div class="navbar navbar-static-top">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="#">Stalker</a>
+    <div class="container" >
+      <%= link_to "Stalker", root_path, :class => 'brand' %>
         <ul class="nav">
           <% if user_signed_in? %>
           <li class="<%= 'active' if params[:controller] == 'events' %>"><%= link_to "Events", events_path %> </li>
@@ -25,7 +25,6 @@
             <% end %>
         </ul>
           <ul class="nav pull-right">  
-            <li>Hello, <%= current_user.name %>!</li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
           </ul>
           <% else %>

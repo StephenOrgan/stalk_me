@@ -1,8 +1,8 @@
 <h1>
-	<% if @user.uid.present? %>
-  	<%= image_tag Twitter.user(@user.uid.to_i).profile_image_url %>
-  <% elsif @user.image.present? %>
-    <%= image_tag @user.image.url(:thumb) %>
+	<% if @user.image.present? %>
+		<%= image_tag @user.image.url(:thumb) %>
+  <% elsif @user.uid.present? %>
+    <%= image_tag Twitter.user(@user.uid.to_i).profile_image_url %>
   <% else %>
   	No image yet
   <% end %>

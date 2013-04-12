@@ -1,4 +1,5 @@
+
 <%= form_for [event, comment] do |f| %>
 	<%= f.text_field :body, placeholder: 'Care to comment?' %>
-	<%= f.submit %>
+	<%= f.submit "Comment", class: 'btn btn-primary' %>
 <% end %>
