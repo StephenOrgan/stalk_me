@@ -12,7 +12,7 @@ class Devise::OmniauthCallbacksController < ApplicationController
 			u.email = "#{uid}@twitter.com"
 		end
 
-		@friends = User.where(uid: Twitter.friend_ids(user.name).collection)
+		@friends = User.where(uid: Twitter.friend_ids(user.name).collection.map {|item| item.to_s})
 		#firends = users whre uid IN twitterId
 
 		#friends.each friend
