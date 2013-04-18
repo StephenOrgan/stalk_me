@@ -21,12 +21,19 @@
 
 	  			<td>
 	  				<div class="home_left">
-	  				<div style="font-weight:bold;">
+	  				<div style="font-weight:bold; font-size:16px;">
 	  					<%= link_to event.user.name, user_path(event.user) %> 
-	  					<%= link_to "- #{event.description}", event, :class => "event_link" %></div>
+	  					<div><%= link_to " #{event.description}", event, :class => "event_link" %></div>
+	  				</div>
+
 	  				<div>
+	  					<%if event.link.present? %>
 	  					<img width="450" height="400" src=  "<%= event.link %>" 
-	  								class="img-polaroid" style="margin-top:10px;"></div>
+	  								class="img-polaroid" style="margin-top:10px;">
+	  					<% else %>
+	  					<% end %>
+	  				</div>
+
 	  				<div style="font-size:12px; margin-top:5px;"><%= link_to "Posted #{time_ago_in_words(event.created_at)} ago", event, :class => "event_link" %>
 	  				<% if event.comments.present? %>
 	  					- <%= link_to "#{event.comments.count} comments", event, :class => "event_link"%>

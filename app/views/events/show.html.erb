@@ -23,8 +23,17 @@
               <img width="450" height="400" src=  "<%= @event.link %>" 
                     class="img-polaroid" style="margin-top:10px;"></div>
             <div style="font-size:12px; margin-top:5px;"><%= link_to "Posted #{time_ago_in_words(@event.created_at)} ago", @event, :class => "event_link" %>
+            
             <% if @event.comments.present? %>
               - <%= link_to "#{@event.comments.count} comments", @event, :class => "event_link"%>
+            <% else %>
+            <% end %>
+            <% if @event.likes.present? %>
+              <% if @event.likes.count == 1 %>
+              - <%= link_to "1 like", @event, :class => "event_link" %>
+              <% else %>
+              - <%= link_to "#{@event.likes.count} likes", @event, :class => "event_link" %>
+              <% end %>
             <% else %>
             <% end %>
             <% if @event.user.id == current_user.id %>

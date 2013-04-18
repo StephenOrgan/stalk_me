@@ -8,7 +8,7 @@ class EventsController < ApplicationController
 	def create
 		@event = current_user.events.build(params[:event])
 		@event.user_id = current_user.id
-		@event.likes = 0
+
 		if @event.save
 			redirect_to events_path created: true
 		else

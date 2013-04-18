@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   validates :user, presence: true
-  validates :link, presence: true, format: /^http:\/\/.+$/
+  #validates :link, presence: true, format: /^http:\/\/.+$/
 
   has_many :comments
   has_many :likes
