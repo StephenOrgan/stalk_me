@@ -33,7 +33,11 @@
 
                   <div style="font-size:12px; margin-top:5px;"><%= link_to "Posted #{time_ago_in_words(event.created_at)} ago", event, :class => "event_link" %>
                   <% if event.comments.present? %>
+                    <% if event.comments.count == 1 %>
+                    - <%= link_to "1 comment", event, :class => "event_link" %>
+                    <% else %>
                     - <%= link_to "#{event.comments.count} comments", event, :class => "event_link"%>
+                    <% end %>
                   <% else %>
                   <% end %>
                   <% if event.likes.present? %>
@@ -72,7 +76,7 @@
               <% else %>
                 <td>No image yet</td>
               <% end %>
-              <td class="profile"><%= @user.name %></td>
+              <td class="profile" style="margin-right:20px;"><%= @user.name %></td>
               
               <td></td>
               <div style="margin-top:40px;">
