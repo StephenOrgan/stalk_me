@@ -1,29 +1,76 @@
-<h1>
-	<% if @user.image.present? %>
-		<%= image_tag @user.image.url(:thumb) %>
-  <% elsif @user.uid.present? %>
-    <%= image_tag Twitter.user(@user.uid.to_i).profile_image_url %>
-  <% else %>
-  	No image yet
-  <% end %>
-	<%= @user.name %>
-</h1>
-<%= link_to 'Edit Profile', edit_user_path(@user) %>
+<body class="topbar-nav" <%= (params[:controller] == 'users' && params[:action] == 'show') ? 'id=background2' : '' %>>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="well span7" style="margin-left:10px;">
 
+          <ul style = "margin-left:30px;">
+            <table>
+            
+               <% @user.events.each do |event| %> 
+                <tr>
+                  <% if event.user.uid.present? %>
+                    <td valign="top"><%= image_tag Twitter.user(event.user.uid.to_i).profile_image_url %></td>
+                  <% elsif event.user.image.present?%>
+                    <td><%= image_tag event.user.image.url(:thumb)  %></td>
+                  <% else %>
+                    No image yet
+                  <% end %>
 
-<div><strong>What <%= @user.name %> have been saying:</strong></div>
-<table>
+                <td>
+                  <div class="home_left">
+                    <div style="font-weight:bold;">
+                      <%= link_to event.user.name, user_path(event.user) %> 
+                      <%= link_to "- #{event.description}", event, :class => "event_link" %>
+                    </div>
+                    <div>
+                      <img width="450" height="400" src=  "<%= event.link %>" 
+                          class="img-polaroid" style="margin-top:10px;">
+                    </div>
+                    <div style="font-size:12px; margin-top:5px;"><%= link_to "Posted #{time_ago_in_words(event.created_at)} ago", event, :class => "event_link" %>
+                      <% if event.comments.present? %>
+                        - <%= link_to "#{event.comments.count} comments", event, :class => "event_link"%>
+                      <% else %>
+                      <% end %>
+                      <% if event.user.id == current_user.id %>
+                        - <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure you want to delete this?' } %>
+                        - <%= link_to 'Edit', edit_event_path(event) %>
+                      <% else %>
+                      <% end %>
+                    </div>
+                    <div style="margin-top:5px;"><%= render event.comments %></div>
+                      <%= render 'comments/form', comment: event.comments.build, event: event %>
+                  </div>
+                  </td>
+                </tr>
+              <% end %>
+            </table>
+          </ul>
 
-<% @user.events.each do |event| %>
-
-  <div>
-    <div><%= link_to event.description, event %><div>
-    <div><img width="300" height="300" src=  "<%= event.link %>" ></div>
-      <div><%= link_to 'Edit', edit_event_path(event) %></div>
-      <div><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></div>
-      <div><%= time_ago_in_words(event.created_at) %> ago </div>
-
+      <div class="span4" style='height:100%;'>
+        <div class="well sidebar-nav sidebar-nav-fixed" style="background-color:orange; margin-right:90px;">
+          <h2 style="margin-right:20px;">Profile</h2>
+          <%= link_to 'Edit Profile', edit_user_path(@user) %>
+            <div style= "margin-top:10px; font-size:16px;">
+              <% if @user.uid.present? %>
+                <td><%= image_tag Twitter.user(@user.uid.to_i).profile_image_url %></td>
+              <% elsif @user.image.present? %>
+                <td><%= image_tag @user.image.url(:thumb) %></td>
+              <% else %>
+                <td>No image yet</td>
+              <% end %>
+              <td class="profile"><%= @user.name %></td>
+                
+              </div>
+              </tr>
+          </div>
+        </div>
+      
+      </div>
+    </div>
   </div>
-<% end %>
-</table>
+</body>
+
+
+
+
 

@@ -7,4 +7,5 @@ class Event < ActiveRecord::Base
   validates :link, presence: true, format: /^http:\/\/.+$/
 
   has_many :comments
+  has_many :likes
 end

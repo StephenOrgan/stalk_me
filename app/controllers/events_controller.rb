@@ -47,7 +47,7 @@ class EventsController < ApplicationController
 
 		respond_to do |format|
 			format.html
-			format.jason { render :json => @event }
+			format.json { render :json => @event }
 		end
 	end
 

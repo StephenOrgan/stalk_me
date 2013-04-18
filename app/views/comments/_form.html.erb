@@ -1,5 +1,11 @@
-
 <%= form_for [event, comment] do |f| %>
 	<%= f.text_field :body, placeholder: 'Care to comment?' %>
 	<%= f.submit "Comment", class: 'btn btn-primary' %>
+
+	<% like = current_user.likes.where(:event_id => event.id).first %>
+	<% if like.present? %>
+	<%= link_to "Unlike", event_like_path(event, like), :method => :delete, :class => "btn" %>
+	<% else %>
+	<%= link_to "Like", event_likes_path(event), :method => :post, :class => "btn btn-success" %>
+	<% end %>
 <% end %>
