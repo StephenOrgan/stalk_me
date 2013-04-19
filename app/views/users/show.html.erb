@@ -65,8 +65,9 @@
 
       <div class="span4" style='height:100%;'>
         <div class="well sidebar-nav sidebar-nav-fixed" style="background-color:orange; margin-right:90px;">
-          <h2 style="margin-right:20px;"><%=time_ago_in_words(@user.created_at)%> and counting <i class="icon-search icon-heart" style="margin-top:13px;"> </i></h2>
-          <%= link_to 'Edit Profile', edit_user_path(@user) %>
+          <h2 style="margin-right:20px;"><%=time_ago_in_words(@user.created_at)%> & counting <i class="icon-search icon-heart" style="margin-top:13px;"> </i></h2>
+          
+          <%= link_to 'Edit Profile', edit_user_path(@user), :remote => true, :class => "edit-profile" %>
             
               <div style= "margin-top:10px; font-size:16px;">
               <% if @user.uid.present? %>
